@@ -7,7 +7,6 @@ import cv2
 import math
 from datetime import datetime
 import numpy as np
-from numpy.core.fromnumeric import size
 from helper_functions import calc_hsv_range, find_greater, draw_cross, draw_text
 
 def image_da_webcam(img):
@@ -37,7 +36,7 @@ def image_da_webcam(img):
 	red_hsv = (3, 70, 70)
 
 	# Threshold para segmentação da imagem
-	threshold = (8, 50, 50)
+	threshold = (8, 50, 60)
 
 	# Ranges mínimos e máximos da imagem, recebe valores HSV entre
 	# [(0, 0, 0), (360, 100, 100)] e retorna valores HSV para opencv entre
@@ -138,7 +137,7 @@ def image_da_webcam(img):
 	#region Ângulo entre os círculos
 
 	# Calcula diferença entre as posições dos círculos
-	diff_y = (red_center_x - blue_center_x)
+	diff_x = (red_center_x - blue_center_x)
 	diff_y = (red_center_y - blue_center_y)
 
 	# Centro entre os círculos
@@ -146,7 +145,7 @@ def image_da_webcam(img):
 	center_y = int((red_center_y + blue_center_y) * .5)
 
 	# Calcula o ângulo em radianos usando arcotangente
-	ang_rad_z = math.atan2(diff_y, diff_y)
+	ang_rad_z = math.atan2(diff_y, diff_x)
 
 	# Converte de radianos para graus 
 	ang_deg_z = ang_rad_z * (180.0 / math.pi)
